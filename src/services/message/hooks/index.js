@@ -1,11 +1,16 @@
 'use strict';
 
-const process = require('./process');
+const restrictToSender = require('./restrict-to-sender');
 
-const globalHooks = require('../../../hooks');
 const hooks = require('feathers-hooks');
 const auth = require('feathers-authentication').hooks;
 
+const globalHooks = require('../../../hooks');
+const process = require('./process');
+const populateSender = hooks.populate('sentBy', {
+  service: 'users',
+  field: 'userId'
+});
 
 exports.before = {
   all: [
@@ -16,16 +21,16 @@ exports.before = {
   find: [],
   get: [],
   create: [process()], // When a message is posted process it first
-  update: [],
-  patch: [],
-  remove: []
+  update: [hooks.remove('sentBy'), restrictToSender()],
+  patch: [hooks.remove('sentBy'), restrictToSender()],
+  remove: [restrictToSender()]
 };
 
 exports.after = {
   all: [],
-  find: [],
-  get: [],
-  create: [],
+  find: [populateSender],
+  get: [populateSender],
+  create: [populateSender],
   update: [],
   patch: [],
   remove: []
