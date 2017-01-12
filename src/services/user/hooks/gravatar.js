@@ -11,7 +11,7 @@ const crypto = require('crypto');
 // The Gravatar image service
 const gravatarUrl = 'https://s.gravatar.com/avatar';
 // The size query. Our chat needs 60px images
-const query = `s=60`;
+const query = 's=60';
 
 // Returns a full URL to a Gravatar image for a given email address
 const gravatarImage = (email) => {
@@ -23,6 +23,6 @@ const gravatarImage = (email) => {
 
 module.exports = function(options) {
   return function(hook) {
-    hook.data = Object.assign({}, hook.data, { avatar: gravatarImage(hook.data.email) })
+    hook.data = Object.assign({}, hook.data, { avatar: gravatarImage(hook.data.email) });
   };
 };

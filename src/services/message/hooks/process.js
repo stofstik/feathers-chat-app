@@ -13,6 +13,6 @@ module.exports = function(options) {
       text,
       userId: user._id,
       createdAt: new Date().getTime()
-    }
+    };
   };
 };

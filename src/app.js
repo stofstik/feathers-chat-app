@@ -16,6 +16,20 @@ const services = require('./services');
 
 const app = feathers();
 
+const configType = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
+
+if (configType === 'dev') {
+  const webpack = require('webpack');
+  const config = require(`../webpack.config.${configType}.js`);
+  const compiler = webpack(config);
+
+  app.use(require('webpack-dev-middleware')(compiler, {
+    publicPath: config.output.publicPath
+  }));
+
+  app.use(require('webpack-hot-middleware')(compiler));
+}
+
 app.configure(configuration(path.join(__dirname, '..')));
 
 app.use(compress())

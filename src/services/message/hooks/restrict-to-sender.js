@@ -16,7 +16,7 @@ module.exports = function(options) {
       }
     });
 
-    // All is good
-    return hook;
+    // NOTE Feathers docs say to put this here but code is unreachable?
+    // return hook;
   };
 };
