@@ -1,0 +1,12 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "mongodb": "mongodb://localhost:27017/feathersChatApp",
+  "public": "../public/",
+  "auth": {
+    "token": {
+      "secret": "YDHwgGvzHaY/db/Ga7ZDbZT2WzxmjPb3UAodKAS2uDh79sm5Xukv4ksXfcWs4DcMEknZxEHlxcYPhGMyA99yFQ=="
+    },
+    "local": {}
+  }
+}
